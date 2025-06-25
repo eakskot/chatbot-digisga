@@ -41,7 +41,7 @@
       padding: 0;
       margin: 0;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
       overflow: hidden;
       background: transparent;
     }
