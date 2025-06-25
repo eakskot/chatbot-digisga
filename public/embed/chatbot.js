@@ -50,7 +50,11 @@
   iframe.style.height = 'min(100vh - 80px, 600px)'; // høyere boks
   iframe.style.border = 'none';
   iframe.style.borderRadius = '16px';
-  iframe.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)'; // myk men ikke "underplate"
+  iframe.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.18)'; // myk men ikke "underplate"
+  iframe.style.background = 'white';
+  iframe.style.boxSizing = 'border-box';
+  iframe.style.overflow = 'hidden';
+
   iframe.style.zIndex = '9998';
   iframe.style.display = 'none';
   iframe.style.backgroundColor = 'white';
