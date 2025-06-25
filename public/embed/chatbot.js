@@ -1,7 +1,7 @@
 (function () {
   // Lag knapp (widget)
   const button = document.createElement('div');
-  button.innerText = '💬'; // snakkeboble emoji
+  button.innerText = '💬';
   button.style.position = 'fixed';
   button.style.bottom = '20px';
   button.style.right = '20px';
@@ -18,7 +18,7 @@
   button.style.zIndex = '9999';
   button.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
 
-  // Lag stil for fade-in animasjon
+  // Fade-in animasjon
   const style = document.createElement('style');
   style.textContent = `
     @keyframes fadeIn {
@@ -28,23 +28,33 @@
     .chatbot-fade-in {
       animation: fadeIn 0.25s ease-out;
     }
+
+    @media (max-width: 600px) {
+      iframe.chatbot-frame {
+        right: 10px !important;
+        left: 10px !important;
+        width: calc(100vw - 20px) !important;
+      }
+    }
   `;
   document.head.appendChild(style);
 
   // Lag iframe (selve chatboten)
   const iframe = document.createElement('iframe');
   iframe.src = 'https://chatbotdigisaga.netlify.app';
+  iframe.classList.add('chatbot-frame');
   iframe.style.position = 'fixed';
   iframe.style.bottom = '90px';
   iframe.style.right = '20px';
   iframe.style.width = 'min(100vw - 40px, 360px)';
-  iframe.style.height = 'min(100vh - 160px, 520px)';
+  iframe.style.height = 'min(100vh - 80px, 600px)'; // høyere boks
   iframe.style.border = 'none';
   iframe.style.borderRadius = '16px';
-  iframe.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+  iframe.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)'; // myk men ikke "underplate"
   iframe.style.zIndex = '9998';
   iframe.style.display = 'none';
   iframe.style.backgroundColor = 'white';
+  iframe.style.margin = '0'; // viktig for mobil
 
   // Toggle visning
   let isOpen = false;
@@ -67,7 +77,7 @@
   });
 
   button.addEventListener('click', function (e) {
-    e.stopPropagation(); // så ikke document.click fanger denne
+    e.stopPropagation();
     toggleChatbot();
   });
 
