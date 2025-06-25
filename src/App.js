@@ -3,14 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
   const [userInput, setUserInput] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      type: 'bot',
-      text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål. \nHvordan kan jeg bistå deg i dag?',
-    },
-  ]);
-
-
+  const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +22,7 @@ function App() {
 
     setTimeout(() => {
       setIsTyping(true);
-    }, 300);
+    }, 400);
     
 
     try {
@@ -43,7 +36,7 @@ function App() {
       setTimeout(() => {
         setMessages([...newMessages, { type: 'bot', text: data.reply }]);
         setIsTyping(false);
-     }, 200);
+     }, 300);
     } catch (error) {
       setMessages([...newMessages, { type: 'bot', text: 'Feil ved henting av svar.' }]);
     }
@@ -52,13 +45,13 @@ function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-200 rounded-2xl shadow-xl bg-white/95 backdrop-blur-sm h-[90vh] flex flex-col">
-      <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">🤖 AI-Chatbot for Helse i Centrum</h1>
+    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-300 rounded-xl shadow-md bg-white h-[90vh] flex flex-col">
+      <h1 className="text-2xl font-bold text-center mb-6 mt-3">🤖 AI-Chatbot for Digisaga</h1>
       <div className="flex-1 overflow-y-auto px-2 space-y-3">
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={ "animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md') }  >
+            className={ "animate-fade-in transition-opacity duration-300 max-w-[80%] p-3 rounded-lg whitespace-pre-wrap break-words" + (msg.type === 'user' ? 'border black-400 bg-blue-600 text-white self-end ml-auto shadow-sm' : 'border black-400 bg-gray-100 text-gray-900 self-start mr-auto shadow-sm') }  >
             {msg.text}
           </div>
         ))}
@@ -84,8 +77,7 @@ function App() {
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-600 text-white px-5 py-2.5 rounded-2xl hover:bg-blue-700 shadow-md hover:shadow-lg transition"
-
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
         >
           Send
         </button>
@@ -108,7 +100,7 @@ function App() {
               &times;
             </button>
             <p className="mb-2">
-              Denne chatten lagrer ikke sensitive personopplysninger og brukes kun for å svare på generelle spørsmål. Informasjonen slettes når du forlater siden. Svarene er kun ment som generell informasjon.
+              Denne chatten lagrer ikke sensitive personopplysninger og brukes kun for å svare på generelle spørsmål. Informasjonen slettes når du forlater siden. Svarene er kun ment som generell informasjon og erstatter ikke medisinsk rådgivning.
             </p>
             <p className="text-xs text-gray-400">
               🤖 Chatboten er utviklet av <a href="https://digisaga.no" className="underline">Digisaga.no</a>.
