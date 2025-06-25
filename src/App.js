@@ -57,7 +57,7 @@ function App() {
         ))}
 
         {isTyping && (
-          <div className="max-w-[80%] p-3 rounded-lg bg-gray-100 text-gray-1200 self-start mr-auto border shadow-sm">
+          <div className="animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl bg-gray-100 text-gray-900 self-start mr-auto shadow-md">
             <span className="animate-fade-in transition-opacity duration-300 typing-dots">Skriver</span>
           </div>
         )}
@@ -77,7 +77,7 @@ function App() {
         />
         <button
           onClick={sendMessage}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
         >
           Send
         </button>
