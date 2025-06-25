@@ -1,7 +1,7 @@
 (function () {
   // Lag knapp (widget)
   const button = document.createElement('div');
-  button.innerText = '🗣'; // snakkeboble emoji
+  button.innerText = '💬'; // snakkeboble emoji
   button.style.position = 'fixed';
   button.style.bottom = '20px';
   button.style.right = '20px';
