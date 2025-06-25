@@ -58,14 +58,14 @@ function App() {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={ "animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md') }  >
+            className={ "animate-fade-in transition-opacity duration-250 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md') }  >
             {msg.text}
           </div>
         ))}
 
         {isTyping && (
-          <div className="max-w-[80%] p-3 rounded-lg bg-gray-100 text-gray-1200 self-start mr-auto border shadow-sm">
-            <span className="animate-fade-in transition-opacity duration-300 typing-dots">Skriver</span>
+          <div className="bg-gray-100 text-gray-900 transition-opacity duration-250 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md">
+            <span className="animate-fade-in transition-opacity duration-250 typing-dots">Skriver</span>
           </div>
         )}
 
