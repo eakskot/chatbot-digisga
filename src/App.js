@@ -52,21 +52,20 @@ function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-200 rounded-2xl shadow-xl bg-white/50 backdrop-blur-sm h-[90vh] flex flex-col">
-
-      <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">🤖 AI-Chatbot for Digisaga</h1>
+    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-200 rounded-2xl shadow-xl bg-white/95 backdrop-blur-sm h-[90vh] flex flex-col">
+      <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">🤖 AI-Chatbot for Helse i Centrum</h1>
       <div className="flex-1 overflow-y-auto px-2 space-y-3">
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={ "animate-fade-in transition-opacity duration-250 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md') }  >
+            className={ "animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md') }  >
             {msg.text}
           </div>
         ))}
 
         {isTyping && (
-          <div className="bg-gray-100 text-gray-900 transition-opacity duration-250 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md">
-            <span className="animate-fade-in transition-opacity duration-250 typing-dots">Skriver</span>
+          <div className="max-w-[80%] p-3 rounded-lg bg-gray-100 text-gray-1200 self-start mr-auto border shadow-sm">
+            <span className="animate-fade-in transition-opacity duration-300 typing-dots">Skriver</span>
           </div>
         )}
 
