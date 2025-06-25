@@ -1,86 +1,96 @@
 (function () {
-  // Lag knapp (widget)
-  const button = document.createElement('div');
-  button.innerText = '💬';
-  button.style.position = 'fixed';
-  button.style.bottom = '20px';
-  button.style.right = '20px';
-  button.style.width = '56px';
-  button.style.height = '56px';
-  button.style.borderRadius = '50%';
-  button.style.backgroundColor = '#4f46e5';
-  button.style.color = 'white';
-  button.style.fontSize = '28px';
-  button.style.display = 'flex';
-  button.style.alignItems = 'center';
-  button.style.justifyContent = 'center';
-  button.style.cursor = 'pointer';
-  button.style.zIndex = '9999';
-  button.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-
-  // Fade-in animasjon
   const style = document.createElement('style');
   style.textContent = `
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #4f46e5;
+      color: white;
+      font-size: 28px;
+      border: none;
+      cursor: pointer;
+      z-index: 10001;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    .chatbot-fade-in {
-      animation: fadeIn 0.25s ease-out;
+
+    #chatbot-overlay {
+      position: fixed;
+      inset: 0;
+      background: transparent;
+      z-index: 10000;
+      display: none;
+    }
+
+    #chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      width: 400px;
+      height: 620px;
+      max-width: 90vw;
+      max-height: 90vh;
+      z-index: 10001;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+    }
+
+    #chatbot-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin: 0;
+      padding: 0;
+      display: block;
+      background: transparent;
     }
 
     @media (max-width: 600px) {
-      iframe.chatbot-frame {
-        right: 10px !important;
-        left: 10px !important;
-        width: calc(100vw - 20px) !important;
+      #chatbot-container {
+        bottom: 80px;
+        right: 12px;
+        width: 95vw;
+        height: 80vh;
       }
     }
   `;
   document.head.appendChild(style);
 
-  // Lag iframe (selve chatboten)
+  // Opprett HTML-elementene
+  const overlay = document.createElement('div');
+  overlay.id = 'chatbot-overlay';
+
+  const container = document.createElement('div');
+  container.id = 'chatbot-container';
+
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://chatbotdigisaga.netlify.app';
-  iframe.classList.add('chatbot-frame');
-  iframe.style.position = 'fixed';
-  iframe.style.bottom = '90px';
-  iframe.style.right = '20px';
-  iframe.style.width = 'min(100vw - 40px, 360px)';
-  iframe.style.height = 'min(100vh - 80px, 600px)'; // høyere boks
-  iframe.style.border = 'none';
-  iframe.style.borderRadius = '16px';
-  iframe.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)'; // myk men ikke "underplate"
-  iframe.style.zIndex = '9998';
-  iframe.style.display = 'none';
-  iframe.style.backgroundColor = 'white';
-  iframe.style.margin = '0'; // viktig for mobil
+  iframe.id = 'chatbot-frame';
+  iframe.src = 'https://chatbotdigisaga.netlify.app'; // <-- dette er React-appen din
+  iframe.title = 'AI Chatbot';
+  iframe.allow = 'clipboard-write';
 
-  // Toggle visning
-  let isOpen = false;
-  function toggleChatbot() {
-    isOpen = !isOpen;
-    if (isOpen) {
-      iframe.classList.add('chatbot-fade-in');
-      iframe.style.display = 'block';
-    } else {
-      iframe.style.display = 'none';
-      iframe.classList.remove('chatbot-fade-in');
-    }
-  }
+  container.appendChild(iframe);
+  overlay.appendChild(container);
+  document.body.appendChild(overlay);
 
-  // Klikk utenfor = lukk
-  document.addEventListener('click', function (e) {
-    if (isOpen && !iframe.contains(e.target) && !button.contains(e.target)) {
-      toggleChatbot();
-    }
+  const toggleBtn = document.createElement('button');
+  toggleBtn.id = 'chatbot-toggle';
+  toggleBtn.innerText = '💬';
+  document.body.appendChild(toggleBtn);
+
+  // Toggle-visning
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = overlay.style.display === 'block';
+    overlay.style.display = isVisible ? 'none' : 'block';
   });
 
-  button.addEventListener('click', function (e) {
-    e.stopPropagation();
-    toggleChatbot();
+  overlay.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      overlay.style.display = 'none';
+    }
   });
-
-  document.body.appendChild(button);
-  document.body.appendChild(iframe);
 })();
