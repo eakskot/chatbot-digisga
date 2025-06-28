@@ -110,31 +110,28 @@
   toggleBtn.textContent = '💬';
   document.body.appendChild(toggleBtn);
 
-  // Legg til preview-boble (før man åpner chatten)
   const previewBubble = document.createElement('div');
   previewBubble.textContent = 'Hei, trenger du hjelp?';
   previewBubble.id = 'chatbot-preview';
   previewBubble.style.display = 'none';
   document.body.appendChild(previewBubble);
 
-  // Vis etter 2 sekunder, skjul etter 8 sekunder
-  setTimeout(() => {
+  // Vis preview etter 2 sekunder
+  const showPreviewTimeout = setTimeout(() => {
     previewBubble.style.display = 'block';
 
-    const hideTimeout = setTimeout(() => {
+    // Skjul preview etter 8 sekunder
+    var hideTimeout = setTimeout(() => {
       previewBubble.style.display = 'none';
     }, 8000);
-
-    toggleBtn.addEventListener('click', () => {
-      previewBubble.style.display = 'none';
-      clearTimeout(hideTimeout);
-    });
   }, 2000);
 
-  // Åpne/lukk chat
+  // Åpne/lukk chatbot og skjul preview
   toggleBtn.addEventListener('click', () => {
     const isVisible = overlay.style.display === 'block';
     overlay.style.display = isVisible ? 'none' : 'block';
+    previewBubble.style.display = 'none';
+    clearTimeout(showPreviewTimeout);
   });
 
   overlay.addEventListener('click', (e) => {
