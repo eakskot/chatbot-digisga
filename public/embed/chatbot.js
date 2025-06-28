@@ -37,6 +37,9 @@
       padding: 0;
       margin: 0;
       background: transparent;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
     }
 
     #chatbot-frame {
@@ -49,12 +52,38 @@
       background: transparent;
     }
 
+    #chatbot-preview {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      background-color: white;
+      color: #1f2937;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10001;
+      white-space: nowrap;
+      animation: fadeIn 0.3s ease;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (max-width: 600px) {
       #chatbot-container {
         bottom: 80px;
         right: 12px;
         width: 95vw;
         height: 80vh;
+      }
+
+      #chatbot-preview {
+        right: 12px;
+        font-size: 13px;
       }
     }
   `;
@@ -81,6 +110,28 @@
   toggleBtn.textContent = '💬';
   document.body.appendChild(toggleBtn);
 
+  // Legg til preview-boble (før man åpner chatten)
+  const previewBubble = document.createElement('div');
+  previewBubble.textContent = 'Hei, trenger du hjelp?';
+  previewBubble.id = 'chatbot-preview';
+  previewBubble.style.display = 'none';
+  document.body.appendChild(previewBubble);
+
+  // Vis etter 2 sekunder, skjul etter 8 sekunder
+  setTimeout(() => {
+    previewBubble.style.display = 'block';
+
+    const hideTimeout = setTimeout(() => {
+      previewBubble.style.display = 'none';
+    }, 8000);
+
+    toggleBtn.addEventListener('click', () => {
+      previewBubble.style.display = 'none';
+      clearTimeout(hideTimeout);
+    });
+  }, 2000);
+
+  // Åpne/lukk chat
   toggleBtn.addEventListener('click', () => {
     const isVisible = overlay.style.display === 'block';
     overlay.style.display = isVisible ? 'none' : 'block';
