@@ -43,7 +43,7 @@ const sendMessage = async () => {
       setIsTyping(false);
       setTimeout(() => {
         setMessages([...newMessages, { type: 'bot', text: data.reply }]);
-      }, 50);
+      }, 100);
     }, 300);
 
   } catch (error) {
