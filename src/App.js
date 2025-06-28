@@ -22,12 +22,11 @@ const sendMessage = async () => {
   setUserInput('');
 
   // Vis "Skriver"-boblen og scroll etter en kort delay
+  setIsTyping(true);
   setTimeout(() => {
-    setIsTyping(true);
-    setTimeout(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  }, 400);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, 150);
+
 
   try {
     const response = await fetch('https://hook.eu2.make.com/zi5xwux9vtiwkime43bew8epniv4ym95', {
@@ -39,12 +38,11 @@ const sendMessage = async () => {
     const data = await response.json();
 
     // Først fjerner vi "skriver", så legger vi til svaret med liten pause
-    setTimeout(() => {
-      setIsTyping(false);
-      setTimeout(() => {
-        setMessages([...newMessages, { type: 'bot', text: data.reply }]);
-      }, 150);
-    }, 300);
+   setTimeout(() => {
+    setIsTyping(false);
+    setMessages([...newMessages, { type: 'bot', text: data.reply }]);
+  }, 200);
+
 
   } catch (error) {
     setIsTyping(false);
