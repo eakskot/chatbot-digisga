@@ -11,42 +11,52 @@ function App() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+  }, [messages]);
 
 
-  const sendMessage = async () => {
-    if (!userInput.trim()) return;
+const sendMessage = async () => {
+  if (!userInput.trim()) return;
 
-    const newMessages = [...messages, { type: 'user', text: userInput }];
-    setMessages(newMessages);
-    setUserInput('');
+  const newMessages = [...messages, { type: 'user', text: userInput }];
+  setMessages(newMessages);
+  setUserInput('');
 
+  // Vis "Skriver"-boblen og scroll etter en kort delay
+  setTimeout(() => {
+    setIsTyping(true);
     setTimeout(() => {
-      setIsTyping(true);
-    }, 400);
-    
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }, 400);
 
-    try {
-      const response = await fetch('https://hook.eu2.make.com/zi5xwux9vtiwkime43bew8epniv4ym95', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userInput, history: messages }),
-      });
+  try {
+    const response = await fetch('https://hook.eu2.make.com/zi5xwux9vtiwkime43bew8epniv4ym95', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userInput, history: messages }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
+
+    // Først fjerner vi "skriver", så legger vi til svaret med liten pause
+    setTimeout(() => {
+      setIsTyping(false);
       setTimeout(() => {
         setMessages([...newMessages, { type: 'bot', text: data.reply }]);
-        setIsTyping(false);
-     }, 300);
-    } catch (error) {
-      setMessages([...newMessages, { type: 'bot', text: 'Feil ved henting av svar.' }]);
-    }
+      }, 50);
+    }, 300);
 
+  } catch (error) {
     setIsTyping(false);
-  };
+    setMessages([...newMessages, { type: 'bot', text: 'Feil ved henting av svar.' }]);
+  }
+
+  
+};
+
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-200 rounded-2xl shadow-2xl ring-1 ring-black/5 bg-white h-[90vh] flex flex-col">
+    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-400 rounded-2xl shadow-lg bg-white h-[90vh] flex flex-col">
       <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">🤖 AI-Chatbot for Digisaga</h1>
       <div className="flex-1 overflow-y-auto px-2 space-y-3">
         {messages.map((msg, index) => (
