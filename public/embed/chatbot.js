@@ -41,12 +41,14 @@
       overflow: hidden;
       opacity: 0;
       transform: scale(0.95);
+      pointer-events: none;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     #chatbot-container.visible {
       opacity: 1;
       transform: scale(1);
+      pointer-events: auto;
     }
 
     #chatbot-frame {
