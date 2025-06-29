@@ -166,7 +166,10 @@
   overlay.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
       container.classList.remove('visible');
-      overlay.style.display = 'none';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300); // samme som animasjonsvarighet
     }
   });
+
 })();
