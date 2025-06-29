@@ -54,7 +54,7 @@ const sendMessage = async () => {
 
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-400 rounded-2xl shadow-none bg-white h-[90vh] flex flex-col">
+    <div className="max-w-2xl mx-auto mt-10 p-4 border border-gray-400 rounded-2xl shadow-lg bg-white h-[90vh] flex flex-col">
       <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">🤖 AI-Chatbot for Digisaga</h1>
       <div className="flex-1 overflow-y-auto px-2 space-y-3">
         {messages.map((msg, index) => (
