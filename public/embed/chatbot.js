@@ -38,8 +38,16 @@
       margin: 0;
       background: transparent;
       border-radius: 16px;
-      box-shadow: none
+      box-shadow: none;
       overflow: hidden;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    #chatbot-container.visible {
+      opacity: 1;
+      transform: scale(1);
     }
 
     #chatbot-frame {
@@ -53,7 +61,8 @@
     #chatbot-preview {
       position: fixed;
       bottom: 90px;
-      right: 90px;
+      right: 50%;
+      transform: translateX(50%) translateY(8px);
       background-color: white;
       color: #1f2937;
       padding: 8px 12px;
@@ -63,13 +72,12 @@
       z-index: 10001;
       white-space: nowrap;
       opacity: 0;
-      transform: translateY(8px);
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     #chatbot-preview.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(50%) translateY(0);
     }
 
     @media (max-width: 600px) {
@@ -82,7 +90,7 @@
 
       #chatbot-preview {
         bottom: 80px;
-        right: 80px;
+        right: 50%;
         font-size: 13px;
       }
     }
@@ -110,13 +118,11 @@
   toggleBtn.textContent = '💬';
   document.body.appendChild(toggleBtn);
 
-  // Legg til forhåndsvisningsboble
   const previewBubble = document.createElement('div');
   previewBubble.id = 'chatbot-preview';
   previewBubble.textContent = 'Hei, trenger du hjelp?';
   document.body.appendChild(previewBubble);
 
-  // Vis boblen etter 2 sekunder, skjul etter 8 sekunder
   const showPreviewTimeout = setTimeout(() => {
     previewBubble.classList.add('visible');
     const hideTimeout = setTimeout(() => {
@@ -129,9 +135,9 @@
     });
   }, 2000);
 
-  // Toggle chatbot
   toggleBtn.addEventListener('click', () => {
-    const isVisible = overlay.style.display === 'block';
+    const isVisible = container.classList.contains('visible');
+    container.classList.toggle('visible');
     overlay.style.display = isVisible ? 'none' : 'block';
     previewBubble.classList.remove('visible');
     clearTimeout(showPreviewTimeout);
@@ -139,6 +145,7 @@
 
   overlay.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
+      container.classList.remove('visible');
       overlay.style.display = 'none';
     }
   });
