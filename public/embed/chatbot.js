@@ -1,6 +1,7 @@
 (function () {
   const style = document.createElement('style');
   style.textContent = `
+  
     #chatbot-toggle {
       position: fixed;
       bottom: 24px;
@@ -8,7 +9,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background-color: #4f46e5;
+      background: linear-gradient(135deg, red, orange, yellow, green, blue, indigo, violet);
       color: white;
       font-size: 28px;
       border: none;
