@@ -116,9 +116,13 @@
   previewBubble.style.display = 'none';
   document.body.appendChild(previewBubble);
 
+  console.log('Preview-boble laget:', previewBubble);
+
+
   // Vis preview etter 2 sekunder
   const showPreviewTimeout = setTimeout(() => {
     previewBubble.style.display = 'block';
+    previewBubble.style.backgroundColor = 'red'; // gjør den synlig og lett å spotte
 
     // Skjul preview etter 8 sekunder
     var hideTimeout = setTimeout(() => {
