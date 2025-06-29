@@ -1,7 +1,16 @@
 (function () {
   const style = document.createElement('style');
   style.textContent = `
-  
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+      }
+    }
+
     #chatbot-toggle {
       position: fixed;
       bottom: 24px;
@@ -9,14 +18,32 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, blue, indigo, red, orange, yellow, green);
+      background: repeating-linear-gradient(
+        90deg,
+        red 0%,
+        red 14.28%,
+        orange 14.28%,
+        orange 28.56%,
+        yellow 28.56%,
+        yellow 42.84%,
+        green 42.84%,
+        green 57.12%,
+        blue 57.12%,
+        blue 71.4%,
+        indigo 71.4%,
+        indigo 85.68%,
+        violet 85.68%,
+        violet 100%
+      );
+      background-size: 400% 100%;
+      animation: pulse 3s ease-in-out infinite;
       color: white;
       font-size: 28px;
       border: none;
       cursor: pointer;
       z-index: 10001;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
+
 
     #chatbot-overlay {
       position: fixed;
