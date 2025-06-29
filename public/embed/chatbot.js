@@ -118,7 +118,7 @@
 
     const toggleBtn = document.createElement('button');
     toggleBtn.id = 'chatbot-toggle';
-    toggleBtn.textContent = '💬';
+    toggleBtn.textContent = '😁';
     document.body.appendChild(toggleBtn);
 
     console.log("[Chatbot] Toggle button and iframe injected.");
