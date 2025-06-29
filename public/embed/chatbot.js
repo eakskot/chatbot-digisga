@@ -38,7 +38,7 @@
       margin: 0;
       background: transparent;
       border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: none
       overflow: hidden;
     }
 
