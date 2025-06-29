@@ -46,16 +46,14 @@
       width: 100%;
       height: 100%;
       border: none;
-      margin: 0;
-      padding: 0;
-      display: block;
       background: transparent;
+      display: block;
     }
 
     #chatbot-preview {
       position: fixed;
-      bottom: 160px;
-      right: 24px;
+      bottom: 90px;
+      right: 90px;
       background-color: white;
       color: #1f2937;
       padding: 8px 12px;
@@ -64,13 +62,14 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       z-index: 10001;
       white-space: nowrap;
-      animation: fadeIn 0.3s ease;
-      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    #chatbot-preview.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media (max-width: 600px) {
@@ -82,8 +81,8 @@
       }
 
       #chatbot-preview {
-        bottom: 150px;
-        right: 12px;
+        bottom: 80px;
+        right: 80px;
         font-size: 13px;
       }
     }
@@ -117,25 +116,24 @@
   previewBubble.textContent = 'Hei, trenger du hjelp?';
   document.body.appendChild(previewBubble);
 
-  // Vis preview etter 2 sekunder, skjul etter 8 sekunder
+  // Vis boblen etter 2 sekunder, skjul etter 8 sekunder
   const showPreviewTimeout = setTimeout(() => {
-    previewBubble.style.display = 'block';
-
+    previewBubble.classList.add('visible');
     const hideTimeout = setTimeout(() => {
-      previewBubble.style.display = 'none';
+      previewBubble.classList.remove('visible');
     }, 8000);
 
     toggleBtn.addEventListener('click', () => {
-      previewBubble.style.display = 'none';
+      previewBubble.classList.remove('visible');
       clearTimeout(hideTimeout);
     });
   }, 2000);
 
-  // Toggle-visning av selve chatboten
+  // Toggle chatbot
   toggleBtn.addEventListener('click', () => {
     const isVisible = overlay.style.display === 'block';
     overlay.style.display = isVisible ? 'none' : 'block';
-    previewBubble.style.display = 'none';
+    previewBubble.classList.remove('visible');
     clearTimeout(showPreviewTimeout);
   });
 
