@@ -137,26 +137,12 @@
   }, 2000);
 
   toggleBtn.addEventListener('click', () => {
-    const isVisible = overlay.style.display === 'block';
-    if (isVisible) {
-      overlay.style.display = 'none';
-    } else {
-      // Fjern animasjonsklassen hvis den finnes
-      container.classList.remove('animate-fadeInUp');
-      
-      // Trigger reflow for å tvinge omstart av animasjon
-      void container.offsetWidth;
-
-      // Legg til klassen på nytt
-      container.classList.add('animate-fadeInUp');
-
-      overlay.style.display = 'block';
-    }
-
+    const isVisible = container.classList.contains('visible');
+    container.classList.toggle('visible');
+    overlay.style.display = isVisible ? 'none' : 'block';
     previewBubble.classList.remove('visible');
     clearTimeout(showPreviewTimeout);
   });
-
 
   overlay.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
