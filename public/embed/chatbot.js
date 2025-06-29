@@ -138,11 +138,30 @@
 
   toggleBtn.addEventListener('click', () => {
     const isVisible = container.classList.contains('visible');
-    container.classList.toggle('visible');
-    overlay.style.display = isVisible ? 'none' : 'block';
+
+    if (isVisible) {
+      // Lukk med animasjon
+      container.classList.remove('visible');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300); // matcher transition-duration
+    } else {
+      // Først vis overlayen (men ikke trigger animasjon enda)
+      overlay.style.display = 'block';
+
+      // Vent én "render frame" før vi legger til .visible (trigge animasjon)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          container.classList.add('visible');
+        });
+      });
+    }
+
+    // Fjern forhåndsvisning
     previewBubble.classList.remove('visible');
     clearTimeout(showPreviewTimeout);
   });
+
 
   overlay.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
