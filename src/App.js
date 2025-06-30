@@ -3,12 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
   const [userInput, setUserInput] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      type: 'bot',
-      text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål. \nHvordan kan jeg bistå deg i dag?',
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
