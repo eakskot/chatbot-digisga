@@ -15,7 +15,6 @@
       border: none;
       cursor: pointer;
       z-index: 10001;
-      animation: pulse 3s ease-in-out infinite;
     }
 
 
