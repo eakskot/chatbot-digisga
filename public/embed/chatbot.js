@@ -1,15 +1,7 @@
 (function () {
   const style = document.createElement('style');
   style.textContent = `
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-      }
-    }
-
+   
     #chatbot-toggle {
       position: fixed;
       bottom: 24px;
@@ -17,17 +9,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: repeating-linear-gradient(
-        90deg,
-        red 0px,
-        orange 8px,
-        yellow 16px,
-        green 24px,
-        blue 32px,
-        indigo 40px,
-        violet 48px,
-        red 56px
-      );
+      background-color: #F58008
       color: white;
       font-size: 28px;
       border: none;
