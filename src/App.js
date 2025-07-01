@@ -14,23 +14,21 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
-    if (showModal) {
-      setMessages((prev) => {
-        if (prev.length === 0) {
-          return [
-            {
-              type: 'bot',
-              text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål.\nHvordan kan jeg bistå deg i dag?',
-              
-            },
-          ];
-        }
-        return prev;
-      });
-      console.log('Popup åpnet, meldingsstatus:', messages.length);
+    if (messages.length === 0) {
+      console.log("det funka med velskomstbeskjed")
+      const timeout = setTimeout(() => {
+        setMessages([
+          {
+            type: 'bot',
+            text: 'Hei! Hvordan kan jeg hjelpe deg?',
+          },
+        ]);
+      }, 300);
 
+      return () => clearTimeout(timeout);
     }
-  }, [showModal]);
+  }, []);
+
 
 
 
