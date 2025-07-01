@@ -14,7 +14,7 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
-    if (messages.length === 0) {
+    if (messages.length === 0 && showModal) {
       console.log("det funka med velskomstbeskjed")
       const timeout = setTimeout(() => {
         setMessages([
@@ -97,6 +97,7 @@ const sendMessage = async () => {
         <input
           type="text"
           value={userInput}
+          aria-label="Skriv meldingen din"
           onChange={(e) => setUserInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
           placeholder="Skriv et spørsmål..."

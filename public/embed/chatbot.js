@@ -174,4 +174,9 @@
     }
   });
 
+  iframe.onerror = () => {
+    previewBubble.textContent = "Beklager, vi får ikke kontakt med chatten akkurat nå.";
+  };
+
+
 })();
