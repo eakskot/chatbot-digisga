@@ -21,14 +21,16 @@ function App() {
             {
               type: 'bot',
               text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål.\nHvordan kan jeg bistå deg i dag?',
+              
             },
           ];
         }
         return prev;
       });
+      console.log('Popup åpnet, meldingsstatus:', messages.length);
+
     }
   }, [showModal]);
-
 
 
 
