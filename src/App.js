@@ -13,6 +13,19 @@ function App() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    if (showModal && messages.length === 0) {
+      // Legg til velkomstmelding når popupen vises
+      setMessages([
+        {
+          type: 'bot',
+          text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål.\nHvordan kan jeg bistå deg i dag?',
+        },
+      ]);
+    }
+  }, [showModal]);
+
+
 
 const sendMessage = async () => {
   if (!userInput.trim()) return;
