@@ -14,16 +14,21 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
-    if (showModal && messages.length === 0) {
-      // Legg til velkomstmelding når popupen vises
-      setMessages([
-        {
-          type: 'bot',
-          text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål.\nHvordan kan jeg bistå deg i dag?',
-        },
-      ]);
+    if (showModal) {
+      setMessages((prev) => {
+        if (prev.length === 0) {
+          return [
+            {
+              type: 'bot',
+              text: 'Hei! Jeg er en kundeservice-robot som er her for å svare på spørsmål.\nHvordan kan jeg bistå deg i dag?',
+            },
+          ];
+        }
+        return prev;
+      });
     }
   }, [showModal]);
+
 
 
 

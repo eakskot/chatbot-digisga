@@ -9,7 +9,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background-color: #F58008;
+      background-color: #4f46e5;;
       color: white;
       font-size: 28px;
       border: none;
