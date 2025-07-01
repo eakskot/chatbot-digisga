@@ -20,7 +20,7 @@ function App() {
         setMessages([
           {
             type: 'bot',
-            text: 'Hei! Hvordan kan jeg hjelpe deg?',
+            text: 'Hei! Jeg er en kundeservice chatbot. Hvordan kan jeg hjelpe deg?',
           },
         ]);
       }, 300);
