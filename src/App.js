@@ -14,7 +14,7 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
-    if (messages.length === 0 && showModal) {
+    if (messages.length === 0) {
       console.log("det funka med velskomstbeskjed")
       const timeout = setTimeout(() => {
         setMessages([
