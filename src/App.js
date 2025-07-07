@@ -61,7 +61,7 @@ function App() {
 
   return (
     <div className="p-4 bg-transparent min-h-screen flex items-center justify-center">
-      <div className="max-w-2xl w-full border border-gray-400 rounded-2xl drop-shadow-lg bg-white h-[90vh] flex flex-col">
+      <div className="max-w-2xl w-full border border-gray-200 rounded-2xl drop-shadow-lg bg-white h-[90vh] flex flex-col px-4 py-6">
         <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">
           🤖 AI-Chatbot for Digisaga
         </h1>
