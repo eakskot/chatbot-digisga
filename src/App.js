@@ -7,6 +7,8 @@ function App() {
   const messagesEndRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
 
+  const isInIframe = window !== window.parent;
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -61,7 +63,18 @@ function App() {
 
   return (
     <div className="p-4 bg-transparent min-h-screen flex items-center justify-center">
-      <div className="max-w-2xl w-full border border-gray-200 rounded-2xl drop-shadow-lg bg-white h-[90vh] flex flex-col px-4 py-6">
+      <div className="max-w-2xl w-full border border-gray-200 rounded-2xl drop-shadow-lg bg-white h-[90vh] flex flex-col px-4 py-6 relative">
+        
+        {isInIframe && (
+          <button
+            onClick={() => window.parent.postMessage({ type: 'close-chatbot' }, '*')}
+            className="absolute top-3 right-4 text-gray-400 hover:text-gray-700 text-3xl font-bold z-50"
+            aria-label="Lukk chatbot"
+          >
+            &times;
+          </button>
+        )}
+
         <h1 className="text-xl font-bold text-center mb-4 mt-2 bg-blue-50 text-blue-900 px-4 py-2 rounded-lg shadow-sm inline-block">
           🤖 AI-Chatbot for Digisaga
         </h1>

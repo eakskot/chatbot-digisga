@@ -85,10 +85,13 @@
 
     @media (max-width: 600px) {
       #chatbot-container {
-        bottom: 80px;
-        right: 12px;
-        width: 95vw;
-        height: 80vh;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
       }
 
       #chatbot-preview {
