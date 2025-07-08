@@ -22,7 +22,7 @@
     #chatbot-overlay {
       position: fixed;
       inset: 0;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.3); /* legg til for bedre visuell effekt */
       z-index: 10000;
       display: none;
     }
@@ -183,3 +183,17 @@
 
 
 })();
+
+window.addEventListener('message', (event) => {
+  if (event.data?.type === 'close-chatbot') {
+    const container = document.getElementById('chatbot-container');
+    const overlay = document.getElementById('chatbot-overlay');
+    if (container && overlay) {
+      container.classList.remove('visible');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300);
+    }
+  }
+});
+
