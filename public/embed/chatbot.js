@@ -19,7 +19,7 @@
     #chatbot-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: transparent;
       z-index: 10000;
       display: none;
     }
@@ -87,10 +87,14 @@
         bottom: 4px;
         right: 4px;
         width: calc(100vw - 8px) !important;
-        height: calc(100vh - 8px) !important;
+        height: calc(100dvh - 8px) !important;
         max-width: calc(100vw - 8px) !important;
-        max-height: calc(100vh - 8px) !important;
+        max-height: calc(100dvh - 8px) !important;
         border-radius: 16px;
+      }
+
+      #chatbot-overlay {
+          background: rgba(0, 0, 0, 0.3);
       }
 
       #chatbot-preview {
@@ -98,6 +102,8 @@
         right: 12px;
         font-size: 13px;
       }
+
+      
     }
 
   `;
@@ -148,7 +154,7 @@
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300);
+      }, 200);
     } else {
       overlay.style.display = 'block';
 
@@ -198,7 +204,7 @@ window.addEventListener('message', (event) => {
         if (window.innerWidth <= 600 && toggleBtn) {
           toggleBtn.style.display = 'block';
         }
-      }, 300);
+      }, 200);
     }
   }
 });
