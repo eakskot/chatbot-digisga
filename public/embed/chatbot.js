@@ -82,15 +82,15 @@
 
     @media (max-width: 600px) {
       #chatbot-container {
-        top: 12px;
-        left: 12px;
-        bottom: 12px;
-        right: 12px;
-        width: calc(100vw - 24px) !important;
-        height: calc(100vh - 24px) !important;
-        max-width: calc(100vw - 24px) !important;
-        max-height: calc(100vh - 24px) !important;
-        border-radius: 16px;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
       }
 
       #chatbot-preview {
@@ -99,6 +99,7 @@
         font-size: 13px;
       }
     }
+
   `;
   document.head.appendChild(style);
 
