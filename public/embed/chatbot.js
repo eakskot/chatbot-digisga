@@ -1,7 +1,6 @@
 (function () {
   const style = document.createElement('style');
   style.textContent = `
-   
     #chatbot-toggle {
       position: fixed;
       bottom: 24px;
@@ -9,7 +8,7 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background-color: #4f46e5;;
+      background-color: #4f46e5;
       color: white;
       font-size: 28px;
       border: none;
@@ -17,12 +16,10 @@
       z-index: 10001;
     }
 
-
-
     #chatbot-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.3); /* legg til for bedre visuell effekt */
+      background: rgba(0, 0, 0, 0.3);
       z-index: 10000;
       display: none;
     }
@@ -85,13 +82,15 @@
 
     @media (max-width: 600px) {
       #chatbot-container {
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
+        top: 12px;
+        left: 12px;
+        bottom: 12px;
+        right: 12px;
+        width: calc(100vw - 24px) !important;
+        height: calc(100vh - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+        max-height: calc(100vh - 24px) !important;
+        border-radius: 16px;
       }
 
       #chatbot-preview {
@@ -145,16 +144,12 @@
     const isVisible = container.classList.contains('visible');
 
     if (isVisible) {
-      // Lukk med animasjon
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300); // matcher transition-duration
+      }, 300);
     } else {
-      // Først vis overlayen (men ikke trigger animasjon enda)
       overlay.style.display = 'block';
-
-      // Vent én "render frame" før vi legger til .visible (trigge animasjon)
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           container.classList.add('visible');
@@ -162,28 +157,25 @@
       });
     }
 
-    // Fjern forhåndsvisning
     previewBubble.classList.remove('visible');
     clearTimeout(showPreviewTimeout);
   });
-
 
   overlay.addEventListener('click', (e) => {
     if (!container.contains(e.target)) {
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300); // samme som animasjonsvarighet
+      }, 300);
     }
   });
 
   iframe.onerror = () => {
     previewBubble.textContent = "Beklager, vi får ikke kontakt med chatten akkurat nå.";
   };
-
-
 })();
 
+// Lytter etter meldinger fra iframe (f.eks. for å lukke chatboten med X)
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'close-chatbot') {
     const container = document.getElementById('chatbot-container');
@@ -196,4 +188,3 @@ window.addEventListener('message', (event) => {
     }
   }
 });
-
