@@ -82,14 +82,14 @@
 
     @media (max-width: 600px) {
       #chatbot-container {
-        top: 8px;
-        left: 8px;
-        bottom: 8px;
-        right: 8px;
-        width: calc(100vw - 16px) !important;
-        height: calc(100vh - 16px) !important;
-        max-width: calc(100vw - 16px) !important;
-        max-height: calc(100vh - 16px) !important;
+        top: 4px;
+        left: 4px;
+        bottom: 4px;
+        right: 4px;
+        width: calc(100vw - 8px) !important;
+        height: calc(100vh - 8px) !important;
+        max-width: calc(100vw - 8px) !important;
+        max-height: calc(100vh - 8px) !important;
         border-radius: 16px;
       }
 
@@ -148,14 +148,20 @@
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 200);
+      }, 300);
     } else {
       overlay.style.display = 'block';
+
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           container.classList.add('visible');
         });
       });
+
+      // 🚨 Skjul knapp på mobil etter åpning
+      if (window.innerWidth <= 600) {
+        toggleBtn.style.display = 'none';
+      }
     }
 
     previewBubble.classList.remove('visible');
@@ -181,11 +187,19 @@ window.addEventListener('message', (event) => {
   if (event.data?.type === 'close-chatbot') {
     const container = document.getElementById('chatbot-container');
     const overlay = document.getElementById('chatbot-overlay');
+    const toggleBtn = document.getElementById('chatbot-toggle');
+    
     if (container && overlay) {
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 200);
+
+        // ✅ Vis knapp igjen hvis mobil
+        if (window.innerWidth <= 600 && toggleBtn) {
+          toggleBtn.style.display = 'block';
+        }
+      }, 300);
     }
   }
 });
+
