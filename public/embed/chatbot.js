@@ -82,15 +82,15 @@
 
     @media (max-width: 600px) {
       #chatbot-container {
-        top: 0 !important;
-        left: 0 !important;
-        bottom: 0 !important;
-        right: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        max-width: 100vw !important;
-        max-height: 100vh !important;
-        border-radius: 0 !important;
+        top: 8px;
+        left: 8px;
+        bottom: 8px;
+        right: 8px;
+        width: calc(100vw - 16px) !important;
+        height: calc(100vh - 16px) !important;
+        max-width: calc(100vw - 16px) !important;
+        max-height: calc(100vh - 16px) !important;
+        border-radius: 16px;
       }
 
       #chatbot-preview {
@@ -148,7 +148,7 @@
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300);
+      }, 200);
     } else {
       overlay.style.display = 'block';
       requestAnimationFrame(() => {
@@ -167,7 +167,7 @@
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300);
+      }, 200);
     }
   });
 
@@ -185,7 +185,7 @@ window.addEventListener('message', (event) => {
       container.classList.remove('visible');
       setTimeout(() => {
         overlay.style.display = 'none';
-      }, 300);
+      }, 200);
     }
   }
 });

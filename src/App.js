@@ -62,7 +62,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-transparent">
+    <div className="p-4 bg-transparent min-h-screen flex items-center justify-center">
       <div className="max-w-2xl w-full border border-gray-200 rounded-2xl drop-shadow-lg bg-white h-[90vh] flex flex-col px-4 py-6 relative">
         
         {isInIframe && (
