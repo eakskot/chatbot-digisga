@@ -117,7 +117,7 @@ function App() {
         {/* Info-knapp og modal */}
         <div className="mt-2 text-center text-sm text-gray-500">
           <button onClick={() => setShowModal(true)} className="text-black-600 text-xs">
-            <a href="https://digisaga.no">Digisaga.no   |    </a>ℹ️ Personvern
+            <a href="https://digisaga.no" target="_blank" rel="noopener noreferrer">Digisaga.no   |    </a>ℹ️ Personvern
           </button>
         </div>
 
