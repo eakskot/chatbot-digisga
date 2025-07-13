@@ -42,7 +42,7 @@ function App() {
     }, 150);
 
     try {
-      const response = await fetch('https://hook.eu2.make.com/zi5xwux9vtiwkime43bew8epniv4ym95', {
+      const response = await fetch('https://hook.eu2.make.com/vd46caf61dc0pjn6p63g5sm6fuzbd98t', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userInput, history: messages }),
