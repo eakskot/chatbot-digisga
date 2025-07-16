@@ -41,11 +41,13 @@ function App() {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
 
+    const cleanedInput = userInput.replace(/"/g, "'");
+
     try {
       const response = await fetch('https://hook.eu2.make.com/vd46caf61dc0pjn6p63g5sm6fuzbd98t', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userInput, history: messages }),
+        body: JSON.stringify({ message: cleanedInput, history: messages }),
       });
 
       const data = await response.json();
