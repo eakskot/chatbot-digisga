@@ -86,7 +86,11 @@ function App() {
               key={index}
               className={"animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md')}
             >
-              {msg.text}
+              {msg.type === 'user' ? (
+                msg.text
+              ) : (
+                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+              )}
             </div>
           ))}
 
