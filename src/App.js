@@ -75,7 +75,7 @@ function App() {
       if (data.link) {
         updatedMessages.push({
           type: 'bot',
-          text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.link}</a>`
+          text: `<a href="${data.link}" rel="noopener noreferrer">${data.link}</a>`
         });
       }
 
