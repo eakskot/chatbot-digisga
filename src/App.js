@@ -54,8 +54,15 @@ function App() {
 
       setTimeout(() => {
         setIsTyping(false);
-        setMessages([...newMessages, { type: 'bot', text: data.reply }]);
-      }, 200);
+        const updatedMessages = [...newMessages, { type: 'bot', text: data.text }];
+        if (data.link) {
+          updatedMessages.push({
+            type: 'bot',
+            text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.link}</a>`
+          });
+        }
+        setMessages(updatedMessages);
+      }, 150);
 
     } catch (error) {
       setIsTyping(false);
