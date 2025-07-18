@@ -15,7 +15,6 @@ function App() {
 
   useEffect(() => {
     if (messages.length === 0) {
-      console.log("det funka med velskomstbeskjed")
       const timeout = setTimeout(() => {
         setMessages([
           {
@@ -35,13 +34,15 @@ function App() {
     const newMessages = [...messages, { type: 'user', text: userInput }];
     setMessages(newMessages);
     setUserInput('');
-
     setIsTyping(true);
+
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
 
     const cleanedInput = userInput.replace(/"/g, "'");
+
+    let data;
 
     try {
       const response = await fetch('https://hook.eu2.make.com/vd46caf61dc0pjn6p63g5sm6fuzbd98t', {
@@ -50,24 +51,36 @@ function App() {
         body: JSON.stringify({ message: cleanedInput, history: messages }),
       });
 
-      const data = await response.json();
+      const raw = await response.text();
+      console.log("🔍 RÅRESPONS:", raw);
 
-      setTimeout(() => {
-        setIsTyping(false);
-        const updatedMessages = [...newMessages, { type: 'bot', text: data.text }];
-        if (data.link) {
-          updatedMessages.push({
-            type: 'bot',
-            text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.link}</a>`
-          });
-        }
-        setMessages(updatedMessages);
-      }, 150);
+      data = JSON.parse(raw);
+      console.log("✅ PARSET:", data);
 
     } catch (error) {
+      console.error("❌ Feil ved henting/parsing:", error);
       setIsTyping(false);
       setMessages([...newMessages, { type: 'bot', text: 'Feil ved henting av svar.' }]);
+      return;
     }
+
+    setTimeout(() => {
+      setIsTyping(false);
+      const updatedMessages = [...newMessages];
+
+      if (data.text) {
+        updatedMessages.push({ type: 'bot', text: data.text });
+      }
+
+      if (data.link) {
+        updatedMessages.push({
+          type: 'bot',
+          text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.link}</a>`
+        });
+      }
+
+      setMessages(updatedMessages);
+    }, 150);
   };
 
   return (
@@ -91,7 +104,12 @@ function App() {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={"animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " + (msg.type === 'user' ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md' : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md')}
+              className={
+                "animate-fade-in transition-opacity duration-300 max-w-[80%] px-4 py-3 rounded-2xl whitespace-pre-wrap break-words shadow-md " +
+                (msg.type === 'user'
+                  ? 'bg-blue-600 text-white self-end ml-auto rounded-br-md'
+                  : 'bg-gray-100 text-gray-900 self-start mr-auto rounded-bl-md')
+              }
             >
               {msg.type === 'user' ? (
                 msg.text
@@ -109,6 +127,7 @@ function App() {
 
           <div ref={messagesEndRef} />
         </div>
+
         <div className="mt-4 flex gap-2">
           <input
             type="text"
@@ -127,10 +146,11 @@ function App() {
           </button>
         </div>
 
-        {/* Info-knapp og modal */}
         <div className="mt-2 text-center text-sm text-gray-500">
           <button onClick={() => setShowModal(true)} className="text-black-600 text-xs">
-            <a href="https://digisaga.no" target="_blank" rel="noopener noreferrer">Digisaga.no   |    </a>ℹ️ Personvern
+            <a href="https://digisaga.no" target="_blank" rel="noopener noreferrer">
+              Digisaga.no | 
+            </a> ℹ️ Personvern
           </button>
         </div>
 
