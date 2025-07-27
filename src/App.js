@@ -72,15 +72,20 @@ function App() {
         updatedMessages.push({ type: 'bot', text: data.text });
       }
 
-      if (data.link) {
+      if (data.link && data.link.trim() !== "") {
+        const linkText = data.linkText && data.linkText.trim() !== ""
+          ? data.linkText
+          : "Trykk her";
+
         updatedMessages.push({
           type: 'bot',
-          text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${data.linkText || 'Trykk her'} </a>`
+          text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
         });
       }
 
       setMessages(updatedMessages);
     }, 150);
+
   };
 
   return (
