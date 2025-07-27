@@ -68,23 +68,20 @@ function App() {
       setIsTyping(false);
       const updatedMessages = [...newMessages];
 
-      if (data.text) {
-        updatedMessages.push({ type: 'bot', text: data.text });
-      }
+      let messageText = data.text || "";
 
       if (data.link && data.link.trim() !== "") {
-        const linkText = data.linkText && data.linkText.trim() !== ""
-          ? data.linkText
-          : "Trykk her";
+        const linkText = data.linkText && data.linkText.trim() !== "" ? data.linkText : "Trykk her";
+        messageText += `<br><a href="${data.link}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+      }
 
-        updatedMessages.push({
-          type: 'bot',
-          text: `<a href="${data.link}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
-        });
+      if (messageText) {
+        updatedMessages.push({ type: 'bot', text: messageText });
       }
 
       setMessages(updatedMessages);
     }, 150);
+
 
   };
 
