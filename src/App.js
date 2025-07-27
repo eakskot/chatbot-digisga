@@ -72,7 +72,7 @@ function App() {
 
       if (data.link && data.link.trim() !== "") {
         const linkText = data.linkText && data.linkText.trim() !== "" ? data.linkText : "Trykk her";
-        messageText += `<br><a href="${data.link}" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+        messageText += `<br><a href="${data.link}" target="_blank" rel="noopener noreferrer"><strong><em>${linkText}</em></strong></a>`;
       }
 
       if (messageText) {
