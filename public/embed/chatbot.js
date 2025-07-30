@@ -16,6 +16,13 @@
       z-index: 10001;
     }
 
+    #chatbot-toggle:hover{
+      background-color: #3730a3; 
+      transform: scale(1.1); 
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    
+    }
+
     #chatbot-overlay {
       position: fixed;
       inset: 0;
