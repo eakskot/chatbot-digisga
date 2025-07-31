@@ -38,7 +38,7 @@ function App() {
 
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 150);
+    }, 100);
 
     const cleanedInput = userInput.replace(/"/g, "'");
 
@@ -80,7 +80,7 @@ function App() {
       }
 
       setMessages(updatedMessages);
-    }, 150);
+    }, 100);
 
 
   };
